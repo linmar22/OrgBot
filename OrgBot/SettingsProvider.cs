@@ -24,20 +24,32 @@ namespace OrgBot
             _conf = builder.Build();
         }
 
-        public string GetClientId() {
+        public ulong GetClientId() {
             //_logger.Log(new LogMessage(LogSeverity.Info, "SettingsProvider", $"ClientID={_conf["ClientId"]}"));
-            return _conf["ClientId"];
+            return ulong.Parse(_conf["ClientId"]);
         }
 
         public string GetClientSecret()
         {
-            //_logger.Log(new LogMessage(LogSeverity.Info, "SettingsProvider", $"ClientID={_conf["ClientSecret"]}"));
+            //_logger.Log(new LogMessage(LogSeverity.Info, "SettingsProvider", $"ClientSecret={_conf["ClientSecret"]}"));
             return _conf["ClientSecret"];
         }
 
         public string GetAuthToken()
         {
             return _conf["AuthToken"];
+        }
+
+        public string GetNickname()
+        {
+            //_logger.Log(new LogMessage(LogSeverity.Info, "SettingsProvider.GetMainServerId", $"Nickname={_conf["Nickname"]}"));
+            return _conf["Nickname"];
+        }
+
+        public ulong GetMainServerId()
+        {
+            //_logger.Log(new LogMessage(LogSeverity.Info, "SettingsProvider.GetMainServerId", $"MainServerId={_conf["MainServerId"]}"));
+            return ulong.Parse(_conf["MainServerId"]);
         }
     }
 }
