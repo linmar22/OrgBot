@@ -14,5 +14,10 @@ namespace OrgBot
             Console.WriteLine(msg.ToString());
             return Task.CompletedTask;
         }
+
+        public Task LogToChannel(LogMessage msg)
+        {
+            return null;
+        }
     }
 }

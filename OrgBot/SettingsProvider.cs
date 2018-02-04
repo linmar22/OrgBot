@@ -11,8 +11,10 @@ namespace OrgBot
 {
     public class SettingsProvider
     {
+
         private static IConfiguration _conf { get; set; }
         private LoggingProvider _logger;
+
 
         public SettingsProvider()
         {
@@ -50,6 +52,11 @@ namespace OrgBot
         {
             //_logger.Log(new LogMessage(LogSeverity.Info, "SettingsProvider.GetMainServerId", $"MainServerId={_conf["MainServerId"]}"));
             return ulong.Parse(_conf["MainServerId"]);
+        }
+
+        public string GetCommandPrefix()
+        {
+            return _conf["CommandPrefix"];
         }
     }
 }
