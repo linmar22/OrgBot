@@ -8,28 +8,29 @@ namespace OrgBot
     class Program
     {
         private DiscordSocketClient _client;
+        private LoggingProvider _logger;
 
         static void Main(string[] args)
             => new Program().MainAsync().GetAwaiter().GetResult();
 
         public async Task MainAsync()
         {
+            _logger = new LoggingProvider();
             _client = new DiscordSocketClient();
 
-            _client.Log += Log;
+            var config = new SettingsProvider();
 
-            string token = "abcdefg..."; // Remember to keep this private!
-            await _client.LoginAsync(TokenType.Bot, token);
+            _client.Log += _logger.Log;
+
+            await _client.LoginAsync(TokenType.Bot, config.GetAuthToken());
+            
             await _client.StartAsync();
+
+            await _logger.Log(new LogMessage(LogSeverity.Info, "MainAsync", "OrgBot Started"));
 
             // Block this task until the program is closed.
             await Task.Delay(-1);
         }
 
-        private Task Log(LogMessage msg)
-        {
-            Console.WriteLine(msg.ToString());
-            return Task.CompletedTask;
-        }
     }
 }
